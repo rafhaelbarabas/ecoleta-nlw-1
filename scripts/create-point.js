@@ -8,6 +8,8 @@
 //   })
 // }
 
+
+// Selects 
 function populateUFs() {
   let ufSelect = document.querySelector("select[name=uf]")  
 
@@ -26,6 +28,7 @@ function getCities(event) {
 
   // Limpa o valor do select antes de inserir os novos
   citySelect.innerHTML = `<option value="">Selecione a cidade</option>"`
+  citySelect.disabled = true
 
   let uf = event.target.value
 
@@ -33,7 +36,7 @@ function getCities(event) {
     .then(res => res.json())
     .then(cities => {
       for (city of cities) {
-        citySelect.innerHTML += `<option value="${city.id}">${city.nome}</option>`
+        citySelect.innerHTML += `<option value="${city.nome}">${city.nome}</option>`
       }
       citySelect.disabled = false
     })
@@ -45,3 +48,33 @@ function getCities(event) {
 populateUFs()
 
 document.querySelector("select[name=uf").addEventListener("change", getCities)
+
+// Itens de coleta
+
+function handleSelectedItem(event) {
+  let itemLi = event.target
+
+  itemLi.classList.toggle("selected")
+  
+  let itemId = itemLi.dataset.id
+
+  let alreadySelected = selectedItem.findIndex((item) => {
+    return item == itemId
+  })
+  
+  if(alreadySelected){
+    selectedItem.push(itemId)
+  }else{
+    selectedItem.splice(itemId)
+  }
+
+  console.log(selectedItem)
+}
+
+let selectedItem = []
+
+const itemsToCollect = document.querySelectorAll(".items-grid li")
+
+for(let item of itemsToCollect){
+  item.addEventListener("click", handleSelectedItem)
+}
