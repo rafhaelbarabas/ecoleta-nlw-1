@@ -1,17 +1,6 @@
-// function handleOptionsSelectors(url, element){
-//   fetch(url)
-//   .then(res => res.json())
-//   .then( data => {
-//     for(item of data){
-//       element.innerHTML += `<option value="${item.id}">${item.nome}</option>`
-//     }
-//   })
-// }
-
-
 // Selects 
 function populateUFs() {
-  let ufSelect = document.querySelector("select[name=uf]")  
+  let ufSelect = document.querySelector("select[name=uf]")
 
   fetch("https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome")
     .then(res => res.json())
@@ -41,8 +30,8 @@ function getCities(event) {
       citySelect.disabled = false
     })
 
-    let stateInput = document.querySelector("input[name=state]")
-    stateInput.value = event.target.options[event.target.selectedIndex].text
+  let stateInput = document.querySelector("input[name=state]")
+  stateInput.value = event.target.options[event.target.selectedIndex].text
 }
 
 populateUFs()
@@ -50,31 +39,34 @@ populateUFs()
 document.querySelector("select[name=uf").addEventListener("change", getCities)
 
 // Itens de coleta
+let selectedItems = []
 
 function handleSelectedItem(event) {
   let itemLi = event.target
 
   itemLi.classList.toggle("selected")
-  
+
   let itemId = itemLi.dataset.id
 
-  let alreadySelected = selectedItem.findIndex((item) => {
+  let alreadySelected = selectedItems.findIndex((item) => {
     return item == itemId
   })
-  
-  if(alreadySelected){
-    selectedItem.push(itemId)
-  }else{
-    selectedItem.splice(itemId)
-  }
 
-  console.log(selectedItem)
+  if (alreadySelected >= 0) {
+    selectedItems = selectedItems.filter(item => {
+      return item != itemId
+    })
+  } else {
+    selectedItems.push(itemId)
+  }  
+
+  collectedItems.value = selectedItems
 }
-
-let selectedItem = []
 
 const itemsToCollect = document.querySelectorAll(".items-grid li")
 
-for(let item of itemsToCollect){
+for (let item of itemsToCollect) {
   item.addEventListener("click", handleSelectedItem)
 }
+
+const collectedItems = document.querySelector("input[name=items")

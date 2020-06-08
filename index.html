@@ -10,9 +10,10 @@
     rel="stylesheet">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/modal.css">
   <link rel="stylesheet" href="styles/responsive.css">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -21,7 +22,7 @@
     <div class="content">
       <header>
         <img src="/assets/logo.svg" alt="Logomarca">
-        <a href="#" target='_blank'>
+        <a href="/create-point.html" target='_blank'>
           <span></span>
           Cadastre um ponto de coleta
         </a>
@@ -41,6 +42,26 @@
       </main>
     </div>
   </div>
+
+
+  <div id="modal" class="hide">
+    <div class="content">
+      <div class="header">
+        <h1>Pontos de Coleta</h1>
+        <a href="#">Fechar</a>
+      </div>
+      <form action="/search-results.html">
+        <label for="search">Cidade</label>
+        <div class="field">
+          <input type="text" placeholder="Pesquise por cidade" name="search">
+          <button>
+            <img src="assets/search.svg" alt="Buscar"></button></img>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="scripts/index.js"></script>
 </body>
 
 </html>
