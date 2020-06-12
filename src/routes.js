@@ -8,19 +8,23 @@ nunjucks.configure("src/views", {
   noCache: true
 })
 
+// Pasta publica
 server.use(express.static("public"))
 
+// Home
 server.get("/", (req, res) => {
   return res.render("index.html", {
     title: "Seu marketplace de coletas"
   })
 })
 
+// Criar pontos de coleta
 server.get("/create-point", (req, res) => {
   return res.render("create-point.html")
 })
 
-server.get("/search-results", (req, res) => {
+// Resultados da pesquisa
+server.get("/search", (req, res) => {
   return res.render("search-results.html")
 })
 
